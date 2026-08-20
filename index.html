@@ -69,6 +69,20 @@
   button.refresh:hover { background: var(--page); }
   button.refresh:active { transform: translateY(1px); }
 
+  /* Verdict pair (Oskar / RS3) */
+  .vpair { display: inline-flex; gap: 6px; align-items: center; white-space: nowrap; }
+  .car { display: inline-flex; align-items: center; gap: 4px; font-size: .82rem; font-weight: 600;
+         padding: 4px 9px; border-radius: 999px; border: 1px solid var(--hairline); background: var(--surface-1); }
+  .car .mk { font-weight: 800; font-size: .95rem; line-height: 1; }
+  .car.rec { border-color: transparent; }
+  .car.rec.g { background: var(--good-bg); color: var(--good-ink); }
+  .car.rec.g .mk { color: var(--good); }
+  .car.warn { background: var(--warning-bg); color: var(--warning); border-color: transparent; }
+  .car.warn .mk { color: var(--warning-accent); }
+  .car.dim { color: var(--muted); opacity: .78; }
+  .car.dim .mk { color: var(--muted); }
+  .vpair.small .car { font-size: .78rem; padding: 3px 8px; }
+
   /* Hero */
   .hero {
     background: var(--card); border: 1px solid var(--hairline); border-radius: var(--radius);
@@ -78,12 +92,10 @@
   @media (min-width: 640px) { .hero { grid-template-columns: 1.1fr 1fr; align-items: center; } }
   .hero-main { display: flex; align-items: center; gap: 16px; }
   .hero-emoji { font-size: 2.8rem; line-height: 1; }
-  .hero-label { font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0 0 2px; }
-  .hero-verdict { font-size: 1.35rem; font-weight: 700; margin: 0; letter-spacing: -.01em; }
-  .hero-detail { color: var(--text-secondary); font-size: .9rem; margin: 3px 0 0; }
-  .hero-next {
-    border-left: 1px solid var(--hairline); padding-left: 18px;
-  }
+  .hero-label { font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0 0 6px; }
+  .hero-detail { color: var(--text-secondary); font-size: .9rem; margin: 8px 0 0; }
+  .hero-detail b { color: var(--text-primary); }
+  .hero-next { border-left: 1px solid var(--hairline); padding-left: 18px; }
   @media (max-width: 639px){ .hero-next { border-left: none; padding-left: 0; border-top: 1px solid var(--hairline); padding-top: 14px; } }
   .hero-next .k { font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0 0 4px; }
   .hero-next .v { font-size: 1.05rem; font-weight: 650; margin: 0; }
@@ -94,36 +106,29 @@
   .grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
   .day {
     background: var(--card); border: 1px solid var(--hairline); border-radius: var(--radius);
-    box-shadow: var(--shadow); overflow: hidden;
+    box-shadow: var(--shadow); overflow: hidden; border-left: 4px solid var(--hairline);
   }
-  .day-head { display: flex; align-items: center; gap: 12px; padding: 14px 18px; }
+  .day.good { border-left-color: var(--good); }
+  .day.warning { border-left-color: var(--warning-accent); }
+  .day.critical { border-left-color: var(--critical); }
+  .day-head { display: flex; align-items: center; gap: 12px; padding: 14px 18px; flex-wrap: wrap; }
   .day-date { min-width: 118px; }
   .day-date .wd { font-weight: 700; font-size: 1.02rem; }
   .day-date .dt { color: var(--muted); font-size: .82rem; }
-  .day-wx { display: flex; align-items: center; gap: 8px; color: var(--text-secondary); font-size: .9rem; flex: 1; flex-wrap: wrap; }
+  .day-wx { display: flex; align-items: center; gap: 8px; color: var(--text-secondary); font-size: .9rem; flex: 1; flex-wrap: wrap; min-width: 180px; }
   .day-wx .wxemoji { font-size: 1.35rem; }
-  .badge {
-    margin-left: auto; font-size: .82rem; font-weight: 700; padding: 6px 12px; border-radius: 999px;
-    display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
-  }
-  .badge.good { background: var(--good-bg); color: var(--good-ink); }
-  .badge.warning { background: var(--warning-bg); color: var(--warning); }
-  .badge.critical { background: var(--critical-bg); color: var(--critical); }
+  .day-verdict { margin-left: auto; }
   .uncertain-tag { font-size: .7rem; color: var(--muted); border: 1px dashed var(--hairline); padding: 2px 7px; border-radius: 6px; margin-left: 8px; }
 
   .windows { border-top: 1px solid var(--hairline); display: grid; }
   .win { display: flex; align-items: center; gap: 12px; padding: 11px 18px; border-top: 1px solid var(--hairline); flex-wrap: wrap; }
   .win:first-child { border-top: none; }
-  .win-icon { width: 26px; text-align: center; font-size: 1.05rem; }
-  .win-name { min-width: 108px; font-weight: 600; font-size: .9rem; }
+  .win-name { min-width: 118px; font-weight: 600; font-size: .9rem; }
   .win-name small { display: block; font-weight: 400; color: var(--muted); font-size: .76rem; }
-  .win-metrics { display: flex; gap: 14px; flex-wrap: wrap; color: var(--text-secondary); font-size: .84rem; flex: 1; }
+  .win-metrics { display: flex; gap: 14px; flex-wrap: wrap; color: var(--text-secondary); font-size: .84rem; flex: 1; min-width: 180px; }
   .win-metrics b { color: var(--text-primary); font-weight: 600; font-variant-numeric: tabular-nums; }
-  .win-verdict { font-weight: 700; font-size: .84rem; white-space: nowrap; }
-  .win-verdict.good { color: var(--good-ink); }
-  .win-verdict.warning { color: var(--warning); }
-  .win-verdict.critical { color: var(--critical); }
-  .win-reasons { flex-basis: 100%; color: var(--muted); font-size: .8rem; padding-left: 38px; }
+  .win-verdict { margin-left: auto; }
+  .win-reasons { flex-basis: 100%; color: var(--muted); font-size: .8rem; }
 
   /* Legend / logic */
   details.logic { margin-top: 22px; background: var(--card); border: 1px solid var(--hairline); border-radius: var(--radius); padding: 4px 18px; box-shadow: var(--shadow); }
@@ -131,12 +136,8 @@
   details.logic .body { color: var(--text-secondary); font-size: .88rem; padding-bottom: 14px; }
   details.logic h4 { margin: 12px 0 4px; font-size: .86rem; color: var(--text-primary); }
   details.logic ul { margin: 4px 0; padding-left: 20px; }
-  .legend { display: flex; gap: 16px; flex-wrap: wrap; margin: 8px 0 4px; font-size: .84rem; }
-  .legend span { display: inline-flex; align-items: center; gap: 6px; }
-  .chip { width: 12px; height: 12px; border-radius: 4px; }
-  .chip.good { background: var(--good); }
-  .chip.warning { background: var(--warning-accent); }
-  .chip.critical { background: var(--critical); }
+  .legend { display: flex; flex-direction: column; gap: 8px; margin: 8px 0 4px; font-size: .84rem; }
+  .legend .row { display: inline-flex; align-items: center; gap: 10px; }
 
   footer { color: var(--muted); font-size: .78rem; margin-top: 26px; text-align: center; line-height: 1.6; }
   footer a { color: var(--text-secondary); }
@@ -164,8 +165,7 @@
       <div class="hero-emoji skeleton">⏳</div>
       <div>
         <p class="hero-label">Heute</p>
-        <p class="hero-verdict skeleton">…</p>
-        <p class="hero-detail"></p>
+        <p class="skeleton">…</p>
       </div>
     </div>
     <div class="hero-next">
@@ -181,27 +181,27 @@
     <summary>Wie das Urteil zustande kommt (Logik &amp; Grenzwerte)</summary>
     <div class="body">
       <div class="legend">
-        <span><span class="chip good"></span> Oskar ✅ — offen fahren</span>
-        <span><span class="chip warning"></span> Grenzwertig ⚠️ — geht, mit Abstrichen</span>
-        <span><span class="chip critical"></span> RS3 ❌ — lieber der Daily</span>
+        <span class="row"><span class="vpair small"><span class="car rec g">Oskar <span class="mk">✓</span></span><span class="car dim">RS3 <span class="mk">✗</span></span></span> = Oskar-Wetter — offen fahren</span>
+        <span class="row"><span class="vpair small"><span class="car warn">Oskar <span class="mk">✓</span></span><span class="car rec g">RS3 <span class="mk">✓</span></span></span> = grenzwertig — beides ok, Oskar knapp</span>
+        <span class="row"><span class="vpair small"><span class="car dim">Oskar <span class="mk">✗</span></span><span class="car rec g">RS3 <span class="mk">✓</span></span></span> = kein Oskar-Wetter — nimm den RS3</span>
       </div>
-      <p>Bewertet wird nicht der ganze Tag pauschal, sondern <b>deine typischen Fahrfenster je Wochentag</b>:
-      Mo &amp; Do (Homeoffice) → Mittag + Feierabend · Di/Mi/Fr (Büro) → Feierabend · Sa/So → ganzer Tag.
-      Für jedes Fenster werden nur die betreffenden Stunden ausgewertet.</p>
-      <h4>Ein Fenster wird zu <span style="color:var(--critical)">RS3 ❌</span>, wenn:</h4>
+      <p style="margin-top:12px">Der grüne Haken markiert das <b>empfohlene Auto</b>. Jeder Tag bekommt oben eine Gesamteinschätzung
+      und darunter dieselbe Aufteilung: <b>Vormittag (08–12), Nachmittag (12–17), Abend (17–21)</b>.
+      Die Tageseinschätzung ist „Oskar", sobald mindestens ein Zeitraum Oskar-tauglich ist.</p>
+      <h4>Ein Zeitraum ist <b>kein Oskar-Wetter</b> (RS3 ✓), wenn:</h4>
       <ul>
-        <li>im Fenster Niederschlag fällt (&gt; 0,2 mm) oder die Regenwahrscheinlichkeit ≥ 60 % ist — Oskar soll nicht nass werden,</li>
+        <li>Niederschlag fällt (&gt; 0,2 mm) oder die Regenwahrscheinlichkeit ≥ 60 % ist — Oskar soll nicht nass werden,</li>
         <li>Frost-/Schnee-Gefahr besteht (Tagestief ≤ 3 °C oder Schnee) → Streusalz-Risiko, und Oskar fährt nur Sommerreifen,</li>
-        <li>oder es schlicht zu kalt ist (unter 12 °C).</li>
+        <li>oder es zu kalt ist (unter 12 °C).</li>
       </ul>
-      <h4>Ein Fenster ist <span style="color:var(--warning)">grenzwertig ⚠️</span>, wenn:</h4>
+      <h4>Ein Zeitraum ist <b>grenzwertig</b> (beide ✓, Oskar gelb), wenn:</h4>
       <ul>
-        <li>es trocken, aber unter deiner Wohlfühlgrenze von 15 °C ist (12–15 °C, mit Jacke/Sitzheizung machbar),</li>
+        <li>es trocken, aber unter der Wohlfühlgrenze von 15 °C ist (12–15 °C),</li>
         <li>ein Restregen-Risiko besteht (30–60 %),</li>
         <li>die Straße noch feucht sein könnte (Regen in den 6 h davor),</li>
         <li>oder es kräftig böig ist (Böen ≥ 45 km/h).</li>
       </ul>
-      <h4>Sonst: <span style="color:var(--good-ink)">Oskar ✅</span></h4>
+      <h4>Sonst: <b>Oskar-Wetter</b> (Oskar ✓)</h4>
       <p style="margin-top:10px">Grenzwerte sind bewusst konservativ zum Schutz von Oskar gewählt und lassen sich jederzeit anpassen.
       Die Tage 6–7 sind als „Prognose unsicher" markiert, weil Wettermodelle so weit voraus deutlich streuen.</p>
     </div>
@@ -218,10 +218,10 @@
 const CONFIG = {
   lat: 47.4245, lon: 9.3767, place: "St. Gallen",
   tempComfort: 15,   // °C: darunter grenzwertig
-  tempHardMin: 12,   // °C: darunter RS3
+  tempHardMin: 12,   // °C: darunter kein Oskar
   saltMinTemp: 3,    // °C Tagestief: darunter Frost-/Salzrisiko
-  rainMm: 0.2,       // mm im Fenster: darüber RS3
-  rainProbHard: 60,  // % : darüber RS3
+  rainMm: 0.2,       // mm im Zeitraum: darüber kein Oskar
+  rainProbHard: 60,  // % : darüber kein Oskar
   rainProbWarn: 30,  // % : darüber grenzwertig
   wetPriorMm: 0.5,   // mm in 6h davor: Straße evtl. feucht
   gustWarn: 45,      // km/h Böen: darüber grenzwertig
@@ -230,16 +230,13 @@ const CONFIG = {
 
 const WD_NAMES = ["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"];
 const WD_SHORT = ["So","Mo","Di","Mi","Do","Fr","Sa"];
-// getDay(): 0=So … 6=Sa
-const WEEKDAY_WINDOWS = {
-  1: [ {label:"Mittag", time:"11–14 Uhr", start:11, end:14}, {label:"Feierabend", time:"17–21 Uhr", start:17, end:21} ],
-  2: [ {label:"Feierabend", time:"17–21 Uhr", start:17, end:21} ],
-  3: [ {label:"Feierabend", time:"17–21 Uhr", start:17, end:21} ],
-  4: [ {label:"Mittag", time:"11–14 Uhr", start:11, end:14}, {label:"Feierabend", time:"17–21 Uhr", start:17, end:21} ],
-  5: [ {label:"Feierabend", time:"17–21 Uhr", start:17, end:21} ],
-  6: [ {label:"Ganzer Tag", time:"09–19 Uhr", start:9, end:19} ],
-  0: [ {label:"Ganzer Tag", time:"09–19 Uhr", start:9, end:19} ]
-};
+
+// Einheitliche Tageszeiträume für JEDEN Tag
+const DAY_WINDOWS = [
+  { label:"Vormittag",  time:"08–12 Uhr", start:8,  end:12 },
+  { label:"Nachmittag", time:"12–17 Uhr", start:12, end:17 },
+  { label:"Abend",      time:"17–21 Uhr", start:17, end:21 }
+];
 
 const WMO = {
   0:["☀️","klar"],1:["🌤️","überw. klar"],2:["⛅","teils bewölkt"],3:["☁️","bedeckt"],
@@ -261,7 +258,6 @@ function apiUrl(){
   return `https://api.open-meteo.com/v1/forecast?latitude=${CONFIG.lat}&longitude=${CONFIG.lon}`
        + `&daily=${d}&hourly=${h}&timezone=Europe%2FZurich&forecast_days=7`;
 }
-// Feldnamen-Fallback (moderne vs. alte Open-Meteo-Namen)
 function pick(obj, ...names){ for(const n of names){ if(obj && obj[n] !== undefined) return obj[n]; } return undefined; }
 
 function evalWindow(dateStr, win, hourly){
@@ -270,8 +266,7 @@ function evalWindow(dateStr, win, hourly){
   const prcp = pick(hourly,"precipitation");
   const prob = pick(hourly,"precipitation_probability");
   const gust = pick(hourly,"wind_gusts_10m","windgusts_10m");
-  const wcode= pick(hourly,"weather_code","weathercode");
-  let tMax=-99, pSum=0, probMax=0, gMax=0, codeAtNoon=null, n=0, priorRain=0;
+  let tMax=-99, pSum=0, probMax=0, gMax=0, n=0, priorRain=0;
   for(let i=0;i<times.length;i++){
     if(!times[i].startsWith(dateStr)) continue;
     const hr = parseInt(times[i].slice(11,13),10);
@@ -281,26 +276,23 @@ function evalWindow(dateStr, win, hourly){
       if(prcp) pSum += (prcp[i]||0);
       if(prob && prob[i]>probMax) probMax=prob[i];
       if(gust && gust[i]>gMax) gMax=gust[i];
-      if(codeAtNoon===null && wcode) codeAtNoon=wcode[i];
     } else if(hr>=win.start-6 && hr<win.start){
       if(prcp) priorRain += (prcp[i]||0);
     }
   }
-  return { tMax, pSum, probMax, gMax, code: codeAtNoon, hours:n, priorRain };
+  return { tMax, pSum, probMax, gMax, hours:n, priorRain };
 }
 
 function classify(m, dTmin, dCode){
   const reasons = [];
   const snow = (dCode>=71 && dCode<=77) || dCode===85 || dCode===86;
-  // Harte RS3-Kriterien
   if(dTmin<=CONFIG.saltMinTemp || snow){
     reasons.push(snow ? "Schnee → Streusalz-Gefahr" : `Tagestief ${Math.round(dTmin)}°C → Frost/Streusalz`);
     return {v:"critical", reasons};
   }
-  if(m.pSum>CONFIG.rainMm){ reasons.push(`Regen im Fenster (${m.pSum.toFixed(1)} mm)`); return {v:"critical", reasons}; }
+  if(m.pSum>CONFIG.rainMm){ reasons.push(`Regen im Zeitraum (${m.pSum.toFixed(1)} mm)`); return {v:"critical", reasons}; }
   if(m.probMax>=CONFIG.rainProbHard){ reasons.push(`hohe Regenwahrsch. (${Math.round(m.probMax)} %)`); return {v:"critical", reasons}; }
   if(m.tMax<CONFIG.tempHardMin){ reasons.push(`zu kalt (max ${Math.round(m.tMax)}°C)`); return {v:"critical", reasons}; }
-  // Grenzwertig
   let warn=false;
   if(m.tMax<CONFIG.tempComfort){ reasons.push(`kühl (max ${Math.round(m.tMax)}°C)`); warn=true; }
   if(m.probMax>=CONFIG.rainProbWarn){ reasons.push(`Regenrisiko ${Math.round(m.probMax)} %`); warn=true; }
@@ -310,8 +302,25 @@ function classify(m, dTmin, dCode){
   return {v:"good", reasons:["trocken & warm genug"]};
 }
 
-const VERDICT = { good:{t:"Oskar ✅", cls:"good"}, warning:{t:"Grenzwertig ⚠️", cls:"warning"}, critical:{t:"RS3 ❌", cls:"critical"} };
 const RANK = { good:3, warning:2, critical:1 };
+
+// Oskar/RS3-Paar mit Haken/Kreuz. Grüner Haken = empfohlenes Auto.
+function carPair(v, small){
+  let oskar, rs3;
+  if(v==="good"){
+    oskar = `<span class="car rec g">Oskar <span class="mk">✓</span></span>`;
+    rs3   = `<span class="car dim">RS3 <span class="mk">✗</span></span>`;
+  } else if(v==="warning"){
+    oskar = `<span class="car warn">Oskar <span class="mk">✓</span></span>`;
+    rs3   = `<span class="car rec g">RS3 <span class="mk">✓</span></span>`;
+  } else {
+    oskar = `<span class="car dim">Oskar <span class="mk">✗</span></span>`;
+    rs3   = `<span class="car rec g">RS3 <span class="mk">✓</span></span>`;
+  }
+  return `<span class="vpair${small?' small':''}" data-v="${v}">${oskar}${rs3}</span>`;
+}
+// Oskar-Sicht-Icon für kompakte Zusammenfassung
+function oskarMark(v){ return v==="good"?"✓":v==="warning"?"~":"✗"; }
 
 function dayVerdict(winResults){
   let best="critical";
@@ -353,35 +362,29 @@ function render(data){
 
   const grid = document.getElementById("grid");
   grid.innerHTML = "";
-  let firstCabrio = null;
-  let cabrioCount = 0;
+  let firstOskar = null;
+  let oskarCount = 0;
   const dayData = [];
 
   for(let i=0;i<days.length;i++){
     const dateStr = days[i];
     const dObj = new Date(dateStr + "T12:00:00");
     const wd = dObj.getDay();
-    const windows = WEEKDAY_WINDOWS[wd];
-    const winResults = windows.map(w => ({ win:w, m:null, res:null }));
-    winResults.forEach(wr => {
-      wr.m = evalWindow(dateStr, wr.win, hourly);
-      wr.res = classify(wr.m, dTmin[i], dCode[i]);
+    const winResults = DAY_WINDOWS.map(w => {
+      const m = evalWindow(dateStr, w, hourly);
+      return { win:w, m, res: classify(m, dTmin[i], dCode[i]) };
     });
     const dv = dayVerdict(winResults);
-    if(dv==="good") cabrioCount++;
-    // erstes Oskar-Fenster in der Zukunft finden
-    if(firstCabrio===null){
+    if(dv==="good") oskarCount++;
+    if(firstOskar===null){
       for(const wr of winResults){
-        if(wr.res.v==="good"){ firstCabrio = {i, dateStr, dObj, wd, wr}; break; }
+        if(wr.res.v==="good"){ firstOskar = {i, dObj, wd, wr}; break; }
       }
     }
-    dayData.push({i, dateStr, dObj, wd, winResults, dv});
+    dayData.push({i, dObj, wd, winResults, dv});
   }
 
-  // Hero
-  buildHero(dayData[0], firstCabrio, cabrioCount, dTmax, dCode, dProb);
-
-  // Karten
+  buildHero(dayData[0], firstOskar, oskarCount, dTmax, dCode);
   for(const d of dayData){
     grid.appendChild(buildDayCard(d, dTmax, dTmin, dCode, dProb, dPrcp));
   }
@@ -390,18 +393,17 @@ function render(data){
 function fmtDate(dObj){ return dObj.toLocaleDateString("de-CH",{day:"2-digit",month:"2-digit"}); }
 function relLabel(i){ return i===0 ? "Heute" : i===1 ? "Morgen" : null; }
 
-function buildHero(today, firstCabrio, cabrioCount, dTmax, dCode, dProb){
+function buildHero(today, firstOskar, oskarCount, dTmax, dCode){
   const hero = document.getElementById("hero");
   const [em, desc] = wmo(dCode[today.i]);
-  const v = VERDICT[today.dv];
-  // Zusammenfassung heutige Fenster
-  const winTxt = today.winResults.map(wr => `${wr.win.label}: ${VERDICT[wr.res.v].t}`).join(" · ");
+  const winSummary = today.winResults.map(wr =>
+    `<b>${wr.win.label}</b> ${oskarMark(wr.res.v)}`).join(" &nbsp;·&nbsp; ");
   let nextV, nextM;
-  if(firstCabrio){
-    const rl = relLabel(firstCabrio.i);
-    const when = rl ? rl : `${WD_NAMES[firstCabrio.wd]}, ${fmtDate(firstCabrio.dObj)}`;
-    nextV = `${when} · ${firstCabrio.wr.win.label}`;
-    nextM = `${firstCabrio.wr.win.time} · trocken, max ${Math.round(firstCabrio.wr.m.tMax)}°C`;
+  if(firstOskar){
+    const rl = relLabel(firstOskar.i);
+    const when = rl ? rl : `${WD_NAMES[firstOskar.wd]}, ${fmtDate(firstOskar.dObj)}`;
+    nextV = `${when} · ${firstOskar.wr.win.label}`;
+    nextM = `${firstOskar.wr.win.time} · trocken, max ${Math.round(firstOskar.wr.m.tMax)}°C`;
   } else {
     nextV = "Kein Oskar-Fenster in Sicht";
     nextM = "Die nächsten 7 Tage sprechen für den RS3.";
@@ -411,22 +413,21 @@ function buildHero(today, firstCabrio, cabrioCount, dTmax, dCode, dProb){
       <div class="hero-emoji">${today.dv==="good"?"🚗":today.dv==="warning"?"🌦️":"🌧️"}</div>
       <div>
         <p class="hero-label">Heute · ${WD_NAMES[today.wd]} · ${em} ${desc}, max ${Math.round(dTmax[today.i])}°C</p>
-        <p class="hero-verdict" style="color:var(--${v.cls==='good'?'good-ink':v.cls})">${v.t}</p>
-        <p class="hero-detail">${winTxt}</p>
+        ${carPair(today.dv)}
+        <p class="hero-detail">${winSummary}</p>
       </div>
     </div>
     <div class="hero-next">
       <p class="k">Nächstes Oskar-Fenster</p>
       <p class="v">${nextV}</p>
-      <p class="m">${nextM} &nbsp;·&nbsp; <span class="cabrio-count">${cabrioCount}</span> Oskar-Tag(e) in 7 Tagen</p>
+      <p class="m">${nextM} &nbsp;·&nbsp; <span class="cabrio-count">${oskarCount}</span> Oskar-Tag(e) in 7 Tagen</p>
     </div>`;
 }
 
 function buildDayCard(d, dTmax, dTmin, dCode, dProb, dPrcp){
   const el = document.createElement("div");
-  el.className = "day";
+  el.className = "day " + d.dv;
   const [em, desc] = wmo(dCode[d.i]);
-  const v = VERDICT[d.dv];
   const rl = relLabel(d.i);
   const uncertain = d.i>=5 ? `<span class="uncertain-tag">Prognose unsicher</span>` : "";
   const head = `
@@ -439,15 +440,12 @@ function buildDayCard(d, dTmax, dTmin, dCode, dProb, dPrcp){
         <span class="wxemoji">${em}</span>
         <span>${desc} · <b>${Math.round(dTmax[d.i])}°</b>/${Math.round(dTmin[d.i])}° · 🌧️ ${Math.round(dProb[d.i]||0)}% · ${(dPrcp[d.i]||0).toFixed(1)} mm</span>
       </div>
-      <span class="badge ${v.cls}">${v.t}</span>
+      <span class="day-verdict">${carPair(d.dv)}</span>
     </div>`;
   let wins = `<div class="windows">`;
   for(const wr of d.winResults){
-    const wv = VERDICT[wr.res.v];
-    const ic = wr.res.v==="good"?"🚗":wr.res.v==="warning"?"⚠️":"🚙";
     wins += `
       <div class="win">
-        <div class="win-icon">${ic}</div>
         <div class="win-name">${wr.win.label}<small>${wr.win.time}</small></div>
         <div class="win-metrics">
           <span>max <b>${Math.round(wr.m.tMax)}°C</b></span>
@@ -455,7 +453,7 @@ function buildDayCard(d, dTmax, dTmin, dCode, dProb, dPrcp){
           <span><b>${wr.m.pSum.toFixed(1)} mm</b></span>
           <span>Böen <b>${Math.round(wr.m.gMax)}</b> km/h</span>
         </div>
-        <div class="win-verdict ${wr.res.v==='good'?'good':wr.res.v}">${wv.t}</div>
+        <span class="win-verdict">${carPair(wr.res.v, true)}</span>
         <div class="win-reasons">${wr.res.reasons.join(" · ")}</div>
       </div>`;
   }
