@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cabrio-Wetter · Audi 80 vs. RS3 · St. Gallen</title>
+<title>Oskar-Wetter · Audi 80 Cabrio vs. RS3 · St. Gallen</title>
 <style>
   :root {
     color-scheme: light dark;
@@ -149,8 +149,8 @@
 <div class="wrap">
   <header class="top">
     <div>
-      <h1>Cabrio-Wetter St. Gallen 🚗🌤️</h1>
-      <p class="sub">Audi 80 Cabriolet <b>offen fahren</b> — oder doch der RS3? · nächste 7 Tage</p>
+      <h1>Oskar-Wetter St. Gallen 🚗🌤️</h1>
+      <p class="sub"><b>Oskar</b> (Audi 80 Cabriolet) offen fahren — oder doch der RS3? · nächste 7 Tage</p>
       <div class="status-line">
         <span class="dot live" id="statusDot"></span>
         <span id="statusText">lade aktuelle Prognose …</span>
@@ -169,7 +169,7 @@
       </div>
     </div>
     <div class="hero-next">
-      <p class="k">Nächstes Cabrio-Fenster</p>
+      <p class="k">Nächstes Oskar-Fenster</p>
       <p class="v skeleton">…</p>
       <p class="m"></p>
     </div>
@@ -181,7 +181,7 @@
     <summary>Wie das Urteil zustande kommt (Logik &amp; Grenzwerte)</summary>
     <div class="body">
       <div class="legend">
-        <span><span class="chip good"></span> Cabrio ✅ — offen fahren</span>
+        <span><span class="chip good"></span> Oskar ✅ — offen fahren</span>
         <span><span class="chip warning"></span> Grenzwertig ⚠️ — geht, mit Abstrichen</span>
         <span><span class="chip critical"></span> RS3 ❌ — lieber der Daily</span>
       </div>
@@ -190,8 +190,8 @@
       Für jedes Fenster werden nur die betreffenden Stunden ausgewertet.</p>
       <h4>Ein Fenster wird zu <span style="color:var(--critical)">RS3 ❌</span>, wenn:</h4>
       <ul>
-        <li>im Fenster Niederschlag fällt (&gt; 0,2 mm) oder die Regenwahrscheinlichkeit ≥ 60 % ist — das Cabrio soll nicht nass werden,</li>
-        <li>Frost-/Schnee-Gefahr besteht (Tagestief ≤ 3 °C oder Schnee) → Streusalz-Risiko, und du fährst nur Sommerreifen,</li>
+        <li>im Fenster Niederschlag fällt (&gt; 0,2 mm) oder die Regenwahrscheinlichkeit ≥ 60 % ist — Oskar soll nicht nass werden,</li>
+        <li>Frost-/Schnee-Gefahr besteht (Tagestief ≤ 3 °C oder Schnee) → Streusalz-Risiko, und Oskar fährt nur Sommerreifen,</li>
         <li>oder es schlicht zu kalt ist (unter 12 °C).</li>
       </ul>
       <h4>Ein Fenster ist <span style="color:var(--warning)">grenzwertig ⚠️</span>, wenn:</h4>
@@ -201,8 +201,8 @@
         <li>die Straße noch feucht sein könnte (Regen in den 6 h davor),</li>
         <li>oder es kräftig böig ist (Böen ≥ 45 km/h).</li>
       </ul>
-      <h4>Sonst: <span style="color:var(--good-ink)">Cabrio ✅</span></h4>
-      <p style="margin-top:10px">Grenzwerte sind bewusst konservativ zum Schutz des Cabrios gewählt und lassen sich jederzeit anpassen.
+      <h4>Sonst: <span style="color:var(--good-ink)">Oskar ✅</span></h4>
+      <p style="margin-top:10px">Grenzwerte sind bewusst konservativ zum Schutz von Oskar gewählt und lassen sich jederzeit anpassen.
       Die Tage 6–7 sind als „Prognose unsicher" markiert, weil Wettermodelle so weit voraus deutlich streuen.</p>
     </div>
   </details>
@@ -310,7 +310,7 @@ function classify(m, dTmin, dCode){
   return {v:"good", reasons:["trocken & warm genug"]};
 }
 
-const VERDICT = { good:{t:"Cabrio ✅", cls:"good"}, warning:{t:"Grenzwertig ⚠️", cls:"warning"}, critical:{t:"RS3 ❌", cls:"critical"} };
+const VERDICT = { good:{t:"Oskar ✅", cls:"good"}, warning:{t:"Grenzwertig ⚠️", cls:"warning"}, critical:{t:"RS3 ❌", cls:"critical"} };
 const RANK = { good:3, warning:2, critical:1 };
 
 function dayVerdict(winResults){
@@ -369,7 +369,7 @@ function render(data){
     });
     const dv = dayVerdict(winResults);
     if(dv==="good") cabrioCount++;
-    // erstes Cabrio-Fenster in der Zukunft finden
+    // erstes Oskar-Fenster in der Zukunft finden
     if(firstCabrio===null){
       for(const wr of winResults){
         if(wr.res.v==="good"){ firstCabrio = {i, dateStr, dObj, wd, wr}; break; }
@@ -403,7 +403,7 @@ function buildHero(today, firstCabrio, cabrioCount, dTmax, dCode, dProb){
     nextV = `${when} · ${firstCabrio.wr.win.label}`;
     nextM = `${firstCabrio.wr.win.time} · trocken, max ${Math.round(firstCabrio.wr.m.tMax)}°C`;
   } else {
-    nextV = "Kein Cabrio-Fenster in Sicht";
+    nextV = "Kein Oskar-Fenster in Sicht";
     nextM = "Die nächsten 7 Tage sprechen für den RS3.";
   }
   hero.innerHTML = `
@@ -416,9 +416,9 @@ function buildHero(today, firstCabrio, cabrioCount, dTmax, dCode, dProb){
       </div>
     </div>
     <div class="hero-next">
-      <p class="k">Nächstes Cabrio-Fenster</p>
+      <p class="k">Nächstes Oskar-Fenster</p>
       <p class="v">${nextV}</p>
-      <p class="m">${nextM} &nbsp;·&nbsp; <span class="cabrio-count">${cabrioCount}</span> Cabrio-Tag(e) in 7 Tagen</p>
+      <p class="m">${nextM} &nbsp;·&nbsp; <span class="cabrio-count">${cabrioCount}</span> Oskar-Tag(e) in 7 Tagen</p>
     </div>`;
 }
 
